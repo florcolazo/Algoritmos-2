@@ -54,3 +54,4 @@ examen *= 0.40
 final = practicas + participacion+examen
 print(f"ESta es la calificacion final:{final:.2f}")
 
+

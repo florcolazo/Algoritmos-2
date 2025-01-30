@@ -36,75 +36,105 @@ jedis = [
     {'nombre_aprendiz':'Palpatine.','maestro':'Yoda','color_sable': ['violeta'],'especie': 'humana'},
     {'nombre_aprendiz':'Ahsoka Tano','maestro':'Qui-Gon Jin','color_sable': ['violeta'],'especie': 'twilek'},
     {'nombre_aprendiz':'Kit Fisto','maestro':'Yoda','color_sable': ['amarillo', 'violeta', 'azul'],'especie':'twilek'},
-    {'nombre_aprendiz':'Darth Maul','maestro':'luke Skywalker','color_sable': ['violeta'],'especie': 'humana'},
+    {'nombre_aprendiz':'Darth Maul','maestro':'Luke Skywalker','color_sable': ['violeta'],'especie': 'humana'},
     {'nombre_aprendiz':'Padmé Amidala','maestro':'Yoda','color_sable': ['amarillo'],'especie': 'twilek'},
 
 ]
-
+# Insertar Jedi en la lista y ordenar por nombre
 for jedi in jedis:
-   
-    lista_jedi.insertar(jedi,'especie')
-
+    lista_jedi.insertar(jedi, 'nombre_aprendiz')
 lista_jedi.ordenar('nombre_aprendiz')
 
-#lista_jedi.ordenar('especie')
-#print()
+# Mostrar Jedi ordenados por nombre y especie
+print("Jedi ordenados por nombre:")
+lista_jedi.barrido()
 
+# B Mostrar información de Ahsoka Tano y Kit Fisto
 
-# poshan_ahsoka = lista_jedi.busqueda('Ahsoka Tano', 'nombre_aprendiz') #puntoB
-# info_ahsoka= lista_jedi.obtener_elemento(poshan_ahsoka)
-# print('--la info de ahsoka tano es--', 'maestro:',info_ahsoka['maestro'],'color de sable de luz:', info_ahsoka['color_sable'], 'especie:', info_ahsoka['especie'])
+pos_ahsoka = lista_jedi.busqueda('Ahsoka Tano', 'nombre_aprendiz') 
+info_ahsoka= lista_jedi.obtener_elemento(pos_ahsoka)
+print('La informacion de Ahsoka Tano es:', 'Maestro:',info_ahsoka['maestro'],'Color de sable de luz:', info_ahsoka['color_sable'], 'Especie:', info_ahsoka['especie'])
 
-# pos_kit = lista_jedi.busqueda('Kit Fisto', 'nombre_aprendiz') #puntoB
-# info_kit= lista_jedi.obtener_elemento(pos_kit)
-# print('--la info de Kit Fisto tano es--', 'maestro:',info_kit['maestro'],'color de sable de luz:', info_kit['color_sable'], 'especie:', info_kit['especie'])
+pos_kit = lista_jedi.busqueda('Kit Fisto', 'nombre_aprendiz') 
+info_kit= lista_jedi.obtener_elemento(pos_kit)
+print('La informacion de Kit Fisto tano es:', 'Maestro:',info_kit['maestro'],'Color de sable de luz:', info_kit['color_sable'], 'Especie:', info_kit['especie'])
 
 lista_jedi.barrido()
 
-# for i in range(lista_jedi.tamanio()): 
-#     personaje = lista_jedi.obtener_elemento(i)
+# c. mostrar todos los padawan de Yoda y Luke Skywalker, es decir sus aprendices;
+lista_yoda = Lista()
+lista_luke = Lista()
+for i in range(lista_jedi.tamanio()):
+    jedi = lista_jedi.obtener_elemento(i)
+    if jedi['maestro'] == 'Yoda':
+        lista_yoda.insertar(jedi['nombre_aprendiz'])
+    elif jedi['maestro'] == 'Luke Skywalker':
+        lista_luke.insertar(jedi['nombre_aprendiz'])
 
-#     if (personaje['maestro'] == 'Yoda'): #puntoC
-#             lista_yoda.insertar(personaje['nombre_aprendiz']) 
+print("Padawans de Yoda:")
+lista_yoda.barrido()
+print("Padawans de Luke Skywalker:")
+lista_luke.barrido()
 
-#     if (personaje['maestro'] == 'Luke Skywalker'): #puntoC
-#             lista_luke.insertar(personaje['nombre_aprendiz']) 
+# d. mostrar los Jedi de especie humana y twilek;
 
-#     if (personaje['especie'] == 'humana' or personaje['especie'] =='twilek'): #puntoD
-#             lista_especie.insertar(personaje['nombre_aprendiz'])        
-               
-#     if (personaje['nombre_aprendiz'][0] == 'A'): #puntoD
-#         listado_A.insertar(personaje['nombre_aprendiz'])
-   
+aprendiz_yoda = ""
+aprendiz_luke = ""
+for i in range (lista_jedi.tamanio()):
+    pos = lista_jedi.obtener_elemento(i)
+    if (pos["maestro"] == "Yoda"):
+        aprendiz_yoda += (pos["nombre_aprendiz"]+ "  ")
+    if (pos["maestro"] == "Luke Skywalker"):
+        aprendiz_luke += (pos["nombre_aprendiz"]+ "  ")    
 
-#     if  (len(personaje['color_sable']) > 1):
-#         lista_sables.insertar(personaje['nombre_aprendiz']) #puntoF    
+print("Los Padawan de Yoda son: ", aprendiz_yoda)
+print("Los Padawan de Luke Skywalker son: ", aprendiz_luke)
+print()
 
+# e. listar todos los Jedi que comienzan con A;
 
-#     if (personaje['color_sable'] == 'violeta' or personaje['color_sable'] == 'amarillo'): #puntoG
-#             lista_sable.insertar(personaje['nombre_aprendiz'])
-#             lista_sable.insertar(personaje['maestro'])  
+listado_A = Lista()
+for i in range(lista_jedi.tamanio()):
+    jedi = lista_jedi.obtener_elemento(i)
+    if jedi['nombre_aprendiz'][0] == 'A':
+        listado_A.insertar(jedi['nombre_aprendiz'])
 
-#     if (personaje['maestro'] == 'Qui-Gon Jin'): #puntoH
-#         lista_quigon.insertar(personaje['nombre_aprendiz'])
-#     if (personaje['maestro'] == 'Mace Windu'): #puntoH
-#         lista_mace.insertar(personaje['nombre_aprendiz'])    
-                     
-    
+print("Jedi cuyos nombres comienzan con 'A':")
+listado_A.barrido()
 
-# print ('los aprendices de yoda son ')
-# lista_yoda.barrido() 
-# print ('los aprendices de Luke Skywalker son ')
-# lista_luke.barrido() 
-# print ('los jedis de especie humana y twilek son ')
-# lista_especie.barrido() 
-# print('el nombre de los jedis que empiezan con A son: ')   
-# listado_A.barrido()  
-# print('los jedis que usaron sable de luz color amarillo o violeta son: ')   
-# lista_sable.barrido()  
-# print(' el nombre de los padawans(aprendices) de Qui-Gon Jin son : ')   
-# lista_quigon.barrido() 
-# print(' el nombre de los padawans(aprendices) de son mace windu son: ')   
-# lista_mace.barrido() 
-# print('Jedis que usaron sable de luz de más de un color')
-# lista_sables.barrido()
+# f. mostrar los Jedi que usaron sable de luz de más de un color;
+
+lista_sables = Lista()
+for i in range(lista_jedi.tamanio()):
+    jedi = lista_jedi.obtener_elemento(i)
+    if len(jedi['color_sable']) > 1:
+        lista_sables.insertar(jedi['nombre_aprendiz'])
+
+print("Jedi que usaron sable de más de un color:")
+lista_sables.barrido()
+
+# g. indicar los Jedi que utilizaron sable de luz amarillo o violeta;
+
+lista_sable = Lista()
+for i in range(lista_jedi.tamanio()):
+    jedi = lista_jedi.obtener_elemento(i)
+    if 'amarillo' in jedi['color_sable'] or 'violeta' in jedi['color_sable']:
+        lista_sable.insertar(jedi['nombre_aprendiz'])
+
+print("Jedi que usaron sable de luz amarillo o violeta:")
+lista_sable.barrido()
+
+# h. indicar los nombre de los padawans de Qui-Gon Jin y Mace Windu, si los tuvieron
+lista_quigon = Lista()
+lista_mace = Lista()
+for i in range(lista_jedi.tamanio()):
+    jedi = lista_jedi.obtener_elemento(i)
+    if jedi['maestro'] == 'Qui-Gon Jin':
+        lista_quigon.insertar(jedi['nombre_aprendiz'])
+    elif jedi['maestro'] == 'Mace Windu':
+        lista_mace.insertar(jedi['nombre_aprendiz'])
+
+print("Padawans de Qui-Gon Jin:")
+lista_quigon.barrido()
+print("Padawans de Mace Windu:")
+lista_mace.barrido()   

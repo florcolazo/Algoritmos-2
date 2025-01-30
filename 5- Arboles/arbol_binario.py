@@ -2,12 +2,14 @@ from cola import Cola
 
 class Arbol(object):
 
-    def __init__(self, info=None, datos=None):
+    def __init__(self, info=None, datos=None,frecuencia = 0):
         self.info = info
         self.datos = datos
         self.der = None
         self.izq = None
         self._altura = 0
+        self.frecuencia = frecuencia
+
 
 
     def arbol_vacio(self):
@@ -114,7 +116,15 @@ class Arbol(object):
             print(self.info)
             if(self.izq is not None):
                 self.izq.postorden()
-         
+
+    def postorden_heroes(self, clave = None):
+        if (self.info is not None):
+            if (self.der is not None):
+                self.der.postorden_heroes()
+            if (self.datos["heroe"] == True):
+                print(self.info)
+            if (self.izq is not None) :
+                self.izq.postorden_heroes()      
 
 
     def preorden(self): #cuando hace el preorden primero se muestra la info, despues va a la izq y desp al derecho
@@ -309,19 +319,18 @@ class Arbol(object):
                 self.der.modificar(clave)      
 
 
-    def separar_heroes_de_villanos(self,arbol_superheroe, arbol_villano):#usado para el ej5
-        if(self.info is not None):
-            if(self.datos['villano']== False):   
-                arbol_superheroe.insertar_nodo(self.info,self.datos)
-            else:
-                arbol_villano.insertar_nodo(self.info,self.datos)  
+    def dos_arboles(self,arbol_superheroes, arbol_villanos):
+                if(self.info is not None):
+                        if(self.datos['heroe'] == True):
+                            arbol_superheroes = arbol_superheroes.insertar_nodo(self.info, self.datos)
+                        else:
+                            arbol_villanos = arbol_villanos.insertar_nodo(self.info, self.datos)
+                        if(self.izq is not None):
+                            self.izq.dos_arboles(arbol_superheroes, arbol_villanos)
+                        if(self.der is not None):
+                            self.der.dos_arboles(arbol_superheroes, arbol_villanos)
 
-            if(self.izq is not None):
-               self.izq.separar_heroes_de_villanos(arbol_superheroe,arbol_villano)
-            if(self.der is not None):
-                self.der.separar_heroes_de_villanos(arbol_superheroe,arbol_villano)   
-
-    def contar_nodos(self):#usado para el ej5
+    def contar_nodos(self):
         cantidad_nodos = 0
         if(self.info is not None):  
             cantidad_nodos += 1   
@@ -350,6 +359,19 @@ class Arbol(object):
                 print(self.datos)
             if(self.der is not None):
                 self.der.inorden_criaturas() 
+
+    
+    
+    def inorden_villanos(self,clave = None):
+            if(self.info is not None):
+                if(self.izq is not None):
+                    self.izq.inorden_villanos()  
+                if (self.datos["heroe"] == False):  
+                    print(self.info)
+                if(self.der is not None):
+                    self.der.inorden_villanos()
+
+                 
 
 
         
