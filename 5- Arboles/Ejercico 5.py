@@ -1,23 +1,49 @@
+#Dado un árbol con los nombre de los superhéroes y villanos de la saga Marvel Cinematic Univer-
+#se (MCU), desarrollar un algoritmo que contemple lo siguiente:
+#a.además del nombre del superhéroe, en cada nodo del árbol se almacenará un campo boo-
+#leano que indica si es un héroe o un villano, True y False respectivamente;
+#b.listar los villanos ordenados alfabéticamente;
+#c.mostrar todos los superhéroes que empiezan con C;
+#d.determinar cuántos superhéroes hay el árbol;
+#e.Doctor Strange en realidad está mal cargado. Utilice una búsqueda por proximidad para
+#encontrarlo en el árbol y modificar su nombre;
+#f.listar los superhéroes ordenados de manera descendente;
+#g.generar un bosque a partir de este árbol, un árbol debe contener a los superhéroes y otro a
+#los villanos, luego resolver las siguiente tareas:
+#I.determinar cuántos nodos tiene cada árbol;
+#II.realizar un barrido ordenado alfabéticamente de cada árbol.
+
+
 from arbol_binario  import Arbol
 
 arbol = Arbol()
 arbol_superheroes = Arbol()
 arbol_villanos = Arbol()
 
-superheroe = {'nombre': 'Doctor Strnge', 'heroe': False, 'aparicion': 1942}
+superheroe = {'nombre': 'Doctor Strnge', 'heroe': False}
 arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
-superheroe = {'nombre': 'Capitan America', 'heroe': True, 'aparicion': 1960}
+superheroe = {'nombre': 'Capitan America', 'heroe': True}
 arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
-superheroe = {'nombre': 'Iron Man', 'heroe': True, 'aparicion': 1960}
+superheroe = {'nombre': 'Iron Man', 'heroe': True}
 arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
-superheroe = {'nombre': 'Hulk', 'heroe': False, 'aparicion': 1960}
+superheroe = {'nombre': 'Hulk', 'heroe': False}
 arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
-superheroe = {'nombre': 'Capitana Marvel', 'heroe': True, 'aparicion': 1960}
+superheroe = {'nombre': 'Capitana Marvel', 'heroe': True}
+arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
+superheroe = {'nombre': 'Thanos', 'heroe': False}
+arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
+superheroe = {'nombre': 'Black Widows', 'heroe': True}
+arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
+superheroe = {'nombre': 'Ravonna Renslayer', 'heroe': False}
+arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
+superheroe = {'nombre': 'Taneleer Tivan', 'heroe': False}
+arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
+superheroe = {'nombre': 'Kang', 'heroe': False}
 arbol = arbol.insertar_nodo(superheroe['nombre'], superheroe)
 
 
 #b. listar los villanos ordenados alfabéticamente;
-print("Listado en orden alfabetico de villanos")
+print("Listado en orden alfabetico de los villanos")
 arbol.inorden_villanos()
 print()
 
@@ -39,7 +65,7 @@ buscado = input("Ingrese nuevamente el nombre a modificar: ")
 pos = arbol.busqueda(buscado)
 
 if pos:
-        nuevo_nombre = input("Ingrese el nuevo nombre: ")
+        nuevo_nombre = input('Ingrese nuevo nombre')
         nombre, superheroe = arbol.eliminar_nodo(buscado)
         superheroe["nombre"] = nuevo_nombre
         arbol = arbol.insertar_nodo(nuevo_nombre,superheroe)

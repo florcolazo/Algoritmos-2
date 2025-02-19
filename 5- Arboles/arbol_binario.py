@@ -111,13 +111,12 @@ class Arbol(object):
 
     def postorden(self): #cuando se hace el postorden, primero va al derecho, despues muestra la info, y desp va a la izq
         if(self.info is not None):
-            if(self.der is not None):
-                self.der.postorden()
-            print(self.info)
+            if(self.der is not None):   
+                print(self.info)
             if(self.izq is not None):
                 self.izq.postorden()
 
-    def postorden_heroes(self, clave = None):
+    def postorden_heroes(self, clave = None): #EJERCICIO 5
         if (self.info is not None):
             if (self.der is not None):
                 self.der.postorden_heroes()
@@ -147,7 +146,7 @@ class Arbol(object):
                 pos = self.der.busqueda(clave)
         return pos  #si pos sale con valor NONE significa que no lo encontramos
     
-    def busqueda_proximidad(self, clave):
+    def busqueda_proximidad(self, clave): #EJERCICIO 5
         if(self.info is not None):
             if(self.izq is not None):
                 self.izq.busqueda_proximidad(clave)
@@ -295,7 +294,7 @@ class Arbol(object):
                 cantidad += self.der.contar_buscados(buscado)
         return cantidad
 
-    def contar_superheroes(self):#usado para el ej5
+    def contar_superheroes(self):# EJERCICIO 5
         cantidad_superheroes = 0
         if(self.info is not None):
             if(self.datos['villano']== False):   
@@ -304,7 +303,18 @@ class Arbol(object):
                 cantidad_superheroes += self.izq.contar_superheroes()
             if(self.der is not None):
                 cantidad_superheroes += self.der.contar_superheroes()
-        return cantidad_superheroes     
+        return cantidad_superheroes
+    
+    def contador_criaturas(self, dic):
+        if (self.info is not None):
+            if (self.izq is not None):
+                self.izq.contador_criaturas(dic)
+            if (self.datos['capturada_por'] in dic and self.datos['capturada_por'] != ''):
+                dic[self.datos['capturada_por']] += 1 #el dic tiene un solo campo, el nombre del heroe, al que se le asigna un valor numericoo (Cantidad de capturas)
+            elif (self.datos['capturada_por'] != ''):
+                dic[self.datos['capturada_por']] = 1
+            if (self.der is not None):
+                self.der.contador_criaturas(dic)
 
 
 
@@ -319,7 +329,7 @@ class Arbol(object):
                 self.der.modificar(clave)      
 
 
-    def dos_arboles(self,arbol_superheroes, arbol_villanos):
+    def dos_arboles(self,arbol_superheroes, arbol_villanos): #EJERCICIO 5
                 if(self.info is not None):
                         if(self.datos['heroe'] == True):
                             arbol_superheroes = arbol_superheroes.insertar_nodo(self.info, self.datos)
@@ -330,7 +340,7 @@ class Arbol(object):
                         if(self.der is not None):
                             self.der.dos_arboles(arbol_superheroes, arbol_villanos)
 
-    def contar_nodos(self):
+    def contar_nodos(self): #EJERCICIO 5
         cantidad_nodos = 0
         if(self.info is not None):  
             cantidad_nodos += 1   
@@ -362,7 +372,7 @@ class Arbol(object):
 
     
     
-    def inorden_villanos(self,clave = None):
+    def inorden_villanos(self,clave = None): #EJERCICIO 5
             if(self.info is not None):
                 if(self.izq is not None):
                     self.izq.inorden_villanos()  
@@ -375,17 +385,59 @@ class Arbol(object):
 
 
         
-    def contar_criaturas_derrotadas(self, dic): #usado para el ej 23
-
-        if(self.info is not None): #chequeamos que no este vacio 
-            if (self.datos['derrotada_por'] and self.datos['derrotada_por']in dic): #si ese derrotada_por esta en el diccionario significa que está cargado
-                dic[self.datos['derrotada_por']] +=1 #entonces le incrementamos la cantidad 
-            elif (self.datos['derrotada_por'] and self.datos['derrotada_por']in dic): #si no esta, pero es distinto de vacio, lo tenemos que cargar
-                 dic[self.datos['derrotada_por']] =1 #entonces lo carga en el diccionario y se lo pone en valor 1
-
-            print(self.info, self._altura, self.datos['derrotada_por'])
-            if(self.izq is not None):
-                self.izq.contar_criaturas_derrotadas(dic)
-            if(self.der is not None):
-                self.der.contar_criaturas_derrotadas(dic)                    
+    def contador_criaturas_derrotadas(self, dic):
+        if (self.info is not None):
+            if (self.izq is not None):
+                self.izq.contador_criaturas_derrotadas(dic)
+            if (self.datos['capturado_por'] in dic and self.datos['capturado_por'] != ''):
+                dic[self.datos['capturado_por']] += 1 #el dic tiene un solo campo, el nombre del heroe, al que se le asigna un valor numericoo (Cantidad de capturas)
+            elif (self.datos['capturado_por'] != ''):
+                dic[self.datos['capturado_por']] = 1
+            if (self.der is not None):
+                self.der.contador_criaturas_derrotadas(dic)                
                         
+    def inorden_capturados_heracles(self,clave = None):
+        if(self.info is not None):
+            if(self.izq is not None):
+                self.izq.inorden_capturados_heracles()  
+            if (self.datos["capturado_por"] == "Heracles"):  
+                print(self.info)
+            if(self.der is not None):
+                self.der.inorden_capturados_heracles() 
+
+    def inorden_no_derrotados(self,clave = None):
+        if(self.info is not None):
+            if(self.izq is not None):
+                self.izq.inorden_no_derrotados()  
+            if (self.datos["capturado_por"] == ""):  
+                print(self.info)
+            if(self.der is not None):
+                self.der.inorden_no_derrotados()     
+
+    def añadir_descripcion(self):
+            if(self.info is not None):
+                if(self.izq is not None):
+                    self.izq.añadir_descripcion()
+                print("La criatura es",self.info)
+                nueva_descripcion = input("Ingrese una descripcion")
+                self.datos["descripcion"]= nueva_descripcion
+                if(self.der is not None):
+                    self.der.añadir_descripcion()
+
+    def modificar_capturador(self, criatura, heroe):
+            pos = self.busqueda(criatura)
+            if (pos):
+                pos.datos['capturado_por'] = heroe
+            else:
+                print('No hay ninguna criatura con el nombre', criatura, 'en el arbol.')
+
+    def busqueda_por_coincidencia(self, clave):
+        if(self.info is not None):
+            if(self.izq is not None):
+                self.izq.busqueda_por_coincidencia(clave)
+            if(clave in self.info):
+                print(self.info)
+            if(self.der is not None):
+                self.der.busqueda_por_coincidencia(clave)
+
+        

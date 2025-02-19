@@ -1,185 +1,178 @@
-from arbol_binario import Arbol 
+""" #23. Implementar un algoritmo que permita generar un árbol con los datos de la siguiente tabla y
+resuelva las siguientes consultas:
+a.listado inorden de las criaturas y quienes la derrotaron;
+b.se debe permitir cargar una breve descripción sobre cada criatura;
+c.mostrar toda la información de la criatura Talos;
+d.determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
+e.listar las criaturas derrotadas por Heracles;
+f.listar las criaturas que no han sido derrotadas;
+g.además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe
+o dios que la capturo;
+h.modifique los nodos de las criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de
+Erimanto indicando que Heracles las atrapó;
+i.se debe permitir búsquedas por coincidencia;
+j.eliminar al Basilisco y a las Sirenas;
+k.modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles
+derroto a varias;
+l.modifique el nombre de la criatura Ladón por Dragón Ladón;
+m.realizar un listado por nivel del árbol;
+n.muestre las criaturas capturadas por Heracles. """
+from arbol_binario import Arbol
 
-arbol = Arbol()
+arbol = Arbol( )
 
-criaturas = {"nombre": "Ceto", "derrotado_por": "","descripcion":"","capturada_por": ""}
+
+criaturas = {"nombre": "Ceto", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Tifon", "derrotado_por": "Zeus","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Tifon", "capturado_por": "Zeus","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Equidna", "derrotado_por": "Argos Panoptes","capturada_por": ""}
+criaturas = {"nombre": "Equidna", "capturado_por": "Argos Panoptes","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Dino", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Dino", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Pefredo", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Pefredo", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Enio", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Enio", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Escila", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Escila", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Caribdis", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Caribdis", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Euriale", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Euriale", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Esteno", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Esteno", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Medusa", "derrotado_por": "Perseo","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Medusa", "capturado_por": "Perseo","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Ladon", "derrotado_por": "Heracles","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Ladon", "capturado_por": "Heracles","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Aguila del Caucaso", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre":"Aguila del Caucaso", "capturado_por":"","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Quimera", "derrotado_por": "Belerofonte","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Quimera", "capturado_por": "Belerofonte","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Hidra de Lerna", "derrotado_por": "Heracles","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Hidra de Lerna", "capturado_por": "Heracles","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Leon de Nemea", "derrotado_por": "Heracles","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Leon de Nemea", "capturado_por": "Heracles","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Esfinge", "derrotado_por": "Edipo","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Esfinge", "capturado_por": "Edipo","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Dragon de la Colquida", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Dragon de la Colquida", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Cerbero", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Cerbero", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Cerda de Cromion", "derrotado_por": "Teseo","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Cerda de Cromion", "capturado_por": "Teseo","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Ortro", "derrotado_por": "Heracles","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Ortro", "capturado_por": "Heracles","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Toro de Creta", "derrotado_por": "Teseo","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Toro de Creta", "capturado_por": "Teseo","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Jabali de Calidon", "derrotado_por": "Atalanta","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Jabali de Calidon", "capturado_por": "Atalanta","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Carcinos", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Carcinos", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Gerion", "derrotado_por": "Heracles","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Gerion", "capturado_por": "Heracles","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Cloto", "derrotado_por": "Zeus","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Cloto", "capturado_por": "Zeus","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Laquesis", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Laquesis", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Atropos", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Atropos", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Minotauro de Creta", "derrotado_por": "Teseo","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Minotauro de Creta", "capturado_por": "Teseo","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Harpias", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Harpias", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Argos Panoptes", "derrotado_por": "Hermes","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Argos Panoptes", "capturado_por": "Hermes","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Aves del Estinfalo", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Aves del Estinfalo", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Talos", "derrotado_por": "Medea","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Talos", "capturado_por": "Medea","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Sirenas", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Sirenas", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Piton", "derrotado_por": "Apolo","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Piton", "capturado_por": "Apolo","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Cierva de Cerinea", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Cierva de Cerinea", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Basilisco", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Basilisco", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Jabali de Erimanto", "derrotado_por": "","descripcion":"","capturada_por": ""}
+criaturas = {"nombre": "Jabali de Erimanto", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
+
+#EJERCICIO A
+print("Listado inorden de las criaturas y quienes la derrotaron")
+arbol.inorden()
+print
+
+#EJERCICIO B
+#arbol.añadir_descripcion()
+#arbol.inorden()
 
 dic = {}
-
-
-#a. Listado inorden de las criaturas y quienes las derrotaron
-print("Barrido inorden:") 
-arbol.inorden()
-print()
-
-#b. se debe permitir cargar una breve descripción sobre cada criatura;
-#arbol.añadir_descripcion()
-
-
-#c. mostrar toda la información de la criatura Talos;
-buscado = "Talos"
-pos = arbol.busqueda(buscado)
-if pos:
-    print ("Info de la criatura:",buscado," ",pos.datos)
-print()
-
-#d. determinar los 3 héroes o dioses que derrotaron mayor cantidad de criaturas;
-arbol.contar_heroes(dic)
+arbol.contador_criaturas_derrotadas(dic)
+#print(dic)
 
 def ordenar(item):
     return item[1]
 
 lista = list(dic.items())
 lista.sort(key=ordenar, reverse=True)
-print("Los 3 heroes que derrotaron mayor cantidad de criaturas: ")
-print(lista[:3])
-print()
 
-#e. listar las criaturas derrotadas por Heracles;
-print("Derrotados por Heracles:")
-arbol.inorden_derrotados_heracles()
-print()
 
-#f. listar las criaturas que no han sido derrotadas;
-print("Criaturas no derrotadas:")
+print('\nHeroes/Dioses que derrotaron a la mayor cantidad de criaturas:')
+for pos in range (0,3):
+    if len(lista[pos]) >= 2:
+	    print(lista[pos][0], '(derroto a',  lista[pos][1], 'criatura(s))')
+    
+
+
+
+#EJERCICIO E e.listar las criaturas derrotadas por Heracles;
+print('\nLista de criaturas derrotadas por Heracles:') #E
+arbol.inorden_capturados_heracles()
+
+#EJERCICIO F listar las criaturas que no han sido derrotadas;
+
+print('\nCriaturas que no han sido derrotadas')
 arbol.inorden_no_derrotados()
+
+
+#EJERCICIO H modifique los nodos de las criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de
+#Erimanto indicando que Heracles las atrapó;
+
+arbol.modificar_capturador('Cerbero', 'Heracles')
+arbol.modificar_capturador('Toro de Creta', 'Heracles')
+arbol.modificar_capturador('Cierva de Cerinea', 'Heracles')
+arbol.modificar_capturador('Jabalí de Erimanto', 'Heracles')
+print()
+arbol.inorden()
+
+#EJERCICIO I.se debe permitir búsquedas por coincidencia;
+clave = input('Comience a escribir parte del nombre de una criatura para buscarla: ')
+#print('Criaturas que contienen "', clave, '" en su nombre:' )
+arbol.busqueda_por_coincidencia(clave)
 print()
 
-#g. además cada nodo debe tener un campo “capturada” que almacenará el nombre del héroe o dios que la capturo;
-#arbol.añadir_captura()
+#EJERCICIO J .eliminar al Basilisco y a las Sirenas;
 
+arbol.eliminar_nodo('Basilisco')
+#arbol.eliminar_nodo('Sirenas')
 
-#h. modifique los nodos de las criaturas Cerbero, Toro de Creta, Cierva Cerinea y Jabalí de Erimanto indicando que Heracles las atrapó;
-buscado = "Cerbero"
-pos = arbol.busqueda(buscado)
-if pos:
-    nuevo_capturador = input("Ingrese el nuevo nombre del capturador de la critatura de Cerbero: ")
-    buscado, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["capturada_por"] = nuevo_capturador
-    arbol = arbol.insertar_nodo(buscado,criaturas)
 print()
-buscado = "Toro de Creta"
-pos = arbol.busqueda(buscado)
-if pos:
-    nuevo_capturador = input("Ingrese el nuevo nombre del capturador de Toro de Creta: ")
-    buscado, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["capturada_por"] = nuevo_capturador
-    arbol = arbol.insertar_nodo(buscado,criaturas)
-print()
-buscado = "Cierva de Cerinea"
-pos = arbol.busqueda(buscado)
-if pos:
-    nuevo_capturador = input("Ingrese el nuevo nombre del capturador de Cierva Cerinea: ")
-    buscado, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["capturada_por"] = nuevo_capturador
-    arbol = arbol.insertar_nodo(buscado,criaturas)
-print()
-buscado = "Jabali de Erimanto"
-pos = arbol.busqueda(buscado)
-if pos:
-    nuevo_capturador = input("Ingrese el nuevo nombre del capturador Jabali de Erimanto: ")
-    buscado, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["capturada_por"] = nuevo_capturador
-    arbol = arbol.insertar_nodo(buscado,criaturas)
-print()
-
-
-#i. se debe permitir búsquedas por coincidencia (proximidad)
-print("Busqueda por proximidad: ")
-arbol.busqueda_proximidad("T")
-
-#j. eliminar al Basilisco y a las Sirenas;
-arbol.eliminar_nodo("Basilisco")
-arbol.eliminar_nodo("Sirenas")
-print()
-
 print("Barrido sin los nodos de Basilisco y Sirenas")
 arbol.inorden()
 print()
 
-#k. modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles derroto a varias;
+#EJERCICIO K modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles
+#derroto a varias;
+
 buscado = "Aves del Estinfalo"
 pos = arbol.busqueda(buscado)
 
 if pos:
     derrota = input("Ingrese el nombre de quien derroto a las Aves del Estinfalo: ")
     nombre, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["derrotado_por"] = derrota
+    criaturas["capturado_por"] = derrota
     arbol = arbol.insertar_nodo(buscado,criaturas)
 print()
 
@@ -187,24 +180,26 @@ print("Barrido modificando quien derroto a las Aves del Estinfalo")
 arbol.inorden()
 print()
 
-#l. modifique el nombre de la criatura Ladón por Dragón Ladón;
-buscado = "Ladon"
+#EJERCICIO L.modifique el nombre de la criatura Ladón por Dragón Ladón;
+
+buscado = 'Ladon'
 pos = arbol.busqueda(buscado)
 
 if pos:
-    nuevo_nombre = input("Ingrese el nuevo nombre de Ladon: ")
-    nombre, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["nombre"] = nuevo_nombre
-    arbol = arbol.insertar_nodo(nuevo_nombre,criaturas)
+     nuevo_nombre = input('Ingreses el nuevo nombre de ka criatura:')
+     nombre, criaturas = arbol.eliminar_nodo(buscado)
+     criaturas['nombre'] = nuevo_nombre
+     arbol = arbol.insertar_nodo(nuevo_nombre, criaturas)
+arbol.inorden_criaturas()
 print()
 
+#EJERCICIO M , realizar un listado por nivel del arbol
 
-
-#m. realizar un listado por nivel del árbol
-print("Barrido por nivel:")
+print('Barrido por nivel del arbol:')
 arbol.barrido_por_nivel()
 print()
 
-#n. muestre las criaturas capturadas por Heracles.
-print("Capturados por Heracles: ")
+#EJERCICIO N , muestre las criaturas capturadas por Heracles
+print ('Capturadas por Heraccles')
 arbol.inorden_capturados_heracles()
+print()

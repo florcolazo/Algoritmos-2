@@ -1,3 +1,22 @@
+"""Partiendo del árbol genealógico de los dioses griegos que se observa en la imagen del ejercicio
+20 de la guía de árboles (capítulo X), convertirlo en un grafo y resolver las siguientes actividades:
+a. además del nombre de los dioses, deberá cargar una breve descripción de quien es o lo que
+representa, no más de 20 palabras;
+b.deberá cargar todas las relaciones entre los distintos dioses: padre, madre, hijo, hermano,
+pareja, la etiquetas de dichas aristas son estos nombre de relación.
+c.dado el nombre de un dios mostrar los hijos de este;
+d.dado el nombre de un dios mostrar su nombre, padre, madre, hermanos y sus hijos;
+e.determinar si existe relación directa entre dos vértice cualquieras, de ser así cual es la rela-
+ción entre ambos;
+f.dados dos dioses determinar el camino más corto entre estos y mostrarlo. Considere como
+camino más corto el que tenga menor número de aristas;
+g.realizar un barrido en profundidad y amplitud de dicho grafo;
+h.realizar un barrido mostrando el nombre de cada dios y el de su madre;
+i.mostrar todos los ancestros de un determinado dios;
+j.mostrar todos los nietos de Cronos;
+k.mostrar todos los hijos de Tea;
+l.persista los datos del grafo en archivos, uno para los vértices y otro para las aristas."""
+
 from grafo import Grafo 
 from cola import Cola
 
@@ -300,72 +319,86 @@ dioses.insertar_arista(1,"Hermes","Hermaphrodite", data ={'relacion': ['padre', 
 dioses.insertar_arista(1,"Aphrodite","Hermaphrodite", data ={'relacion': ['madre', 'hijo']})
 
 
-#c. dado el nombre de un dios mostrar los hijos de este;
-buscado = (input("Ingrese el nombre del dios del cual desea saber sus hijos: "))
-origen = dioses.buscar_vertice(buscado)
-dios = dioses.inicio.obtener_elemento(origen)  ##Inicio es para acceder a las aristas del vertice (aristas = lista)
-print('Hijos de ', dios['info'])
-dioses.relaciones(buscado,"hijo")
+#EJERCICIO C dado el nombre de un dios mostrar los hijos de este;
+nombre_dios = input('Ingrese el nombre de un dios para ver a sus hijos: ').capitalize()
+origen = dioses.buscar_vertice(nombre_dios)
+dios = dioses.inicio.obtener_elemento(origen)
+print('Hijos de', dios['info'],':')
+dioses.relaciones(nombre_dios, "hijo")
 
+#EJERCICIO D dado el nombre de un dios mostrar su nombre, padre,madre, hermanos y sus hijos
 
-#d. dado el nombre de un dios mostrar su nombre, padre, madre, hermanos y sus hijos;
-buscado = (input("Ingrese el nombre del dios que desea saber su info: "))
-print("El dios es: ",buscado)
-print()
-print("Su madre es: ")
-dioses.relaciones(buscado,"madre")
-print()
-print("Su padre es: ")
-dioses.relaciones(buscado,"padre")
-print()
-print("Sus hermanos son: ")
-dioses.relaciones(buscado,"hermanos")
-print()
-print("Sus hijos son : ")
-dioses.relaciones(buscado,"hijo")
+nombre_dios = (input("Ingrese el nombre del dios que desea saber su info:"))
+print("El dios es:", nombre_dios)
 print()
 
+print('Su madre es:')
+dioses.relaciones(nombre_dios,'madre')
+print()
 
-#e. determinar si existe relación directa entre dos vértice cualquieras, de ser así cual es la relación entre ambos;
-buscado1 = (input("Ingrese un vertice para saber si tiene relacion directa con el segundo: "))
-origen = dioses.buscar_vertice(buscado1)
-buscado2 = (input("Ingrese el segundo nombre: "))
-#destino = dioses.buscar_vertice(buscado2)
+print('Su padre es:')
+dioses.relaciones(nombre_dios,"padre")
+print()
 
-if (dioses.es_adyacente(buscado1,buscado2) == True):
+print('Sus hermanos son:')
+dioses.relaciones(nombre_dios,'hermanos')
+print()
+
+
+print('Sus hijos son:')
+dioses.relaciones(nombre_dios, 'hijos')
+print()
+
+
+#EJERCICIO E determinar si existe relación directa entre dos vértice cualquieras,
+#  de ser así cual es la relación entre ambos;
+
+vertice1_buscado = (input('Ingrese un vertice'))
+origen = dioses.buscar_vertice(vertice1_buscado)
+vertice2_buscado = (input('Ingrese el segundo vertice'))
+destino = dioses.buscar_vertice(vertice2_buscado)
+
+if (dioses.es_adyacente(vertice1_buscado,vertice2_buscado) == True):
     dios = dioses.inicio.obtener_elemento(origen)
     for j in range(dios['aristas'].tamanio()):
         arista = dios['aristas'].obtener_elemento(j)
-        if(arista['destino'] == buscado2):
-            print(buscado1," y ",buscado2,' son: ',arista['data']['relacion'])
-else:  
-    print("No existe relacion directa entre ",buscado1, " y ",buscado2)
+        if(arista['destino'] == vertice2_buscado):
+            print(vertice1_buscado,"y",vertice2_buscado,"son:",arista['data']['relacion'])
+else:
+    print('No hay relacion directa')
 
+#EJERCICIO F dados dos dioses determinar el camino más corto entre estos y mostrarlo. 
+# Considere como camino más corto el que tenga menor número de aristas;
 
-#f. dados dos dioses determinar el camino más corto entre estos y mostrarlo. Considere como camino más corto el que tenga menor número de aristas;
-buscado1 = (input("Ingrese el nombre de un dios para ver el camino mas corto con el segundo: "))
-origen = dioses.buscar_vertice(buscado1)
-buscado2 = (input("Ingrese el segundo nombre: "))
-destino = dioses.buscar_vertice(buscado2)
+print ('--Camino mas corto entre dioses--')
+vertice1_buscado = (input('Ingrese un vertice'))
+origen = dioses.buscar_vertice(vertice1_buscado)
+vertice2_buscado = (input('Ingrese el segundo vertice'))
+destino = dioses.buscar_vertice(vertice2_buscado)
 camino = dioses.dijkstra(origen,destino)
 
-destino = buscado2
+destino = vertice2_buscado
 costo = None
+
 while(not camino.pila_vacia()):
     dato = camino.desapilar()
     if(dato[1][0] == destino):
         if(costo is None):
-            costo = dato[0]
+            costo= dato[0]
         print(dato[1][0])
         destino = dato[1][1]
-print('el costo total del camino es:', costo)
+print('costo del camino:', costo)
 
 #g. realizar un barrido en profundidad y amplitud de dicho grafo;
-buscado = (input("Ingrese el nombre de un dios para realizar los barridos: "))
-origen = dioses.buscar_vertice(buscado)
+print('Barrido en profundidad y amplitud de un grafo')
+nombre_dios = (input('Ingrese el nombre de un dios: '))
+origen = dioses.buscar_vertice(nombre_dios)
 
+print('barrido en profundidad ')
 dioses.barrido_profundidad(origen)
 print()
+
+print('barrido en amplitud')
 dioses.barrido_amplitud(origen)
 print()
 
