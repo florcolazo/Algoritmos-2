@@ -3,16 +3,16 @@ tidad de torneos ganados, cantidad de batallas perdidas y cantidad de batallas g
 más la lista de sus Pokémons, de los cuales se sabe: nombre, nivel, tipo y subtipo. Se pide resolver
 las siguientes actividades utilizando lista de lista implementando las funciones necesarias:
 
-b.listar los entrenadores que hayan ganado más de tres torneos;
-[114]c.el Pokémon de mayor nivel del entrenador con mayor cantidad de torneos ganados;
-d.mostrar todos los datos de un entrenador y sus Pokémos;
+b.listar los entrenadores que hayan ganado más de tres torneos;ok
+[114]c.el Pokémon de mayor nivel del entrenador con mayor cantidad de torneos ganados;ok
+d.mostrar todos los datos de un entrenador y sus Pokémos;ok
 e.mostrar los entrenadores cuyo porcentaje de batallas ganados sea mayor al 79 %;
 
-g.el promedio de nivel de los Pokémons de un determinado entrenador;
+g.el promedio de nivel de los Pokémons de un determinado entrenador;ok
 h.determinar cuántos entrenadores tienen a un determinado Pokémon;
 i.mostrar los entrenadores que tienen Pokémons repetidos;
 j.determinar los entrenadores que tengan uno de los siguientes Pokémons: Tyrantrum, Te
-rrakion o Wingull;
+rrakion o Wingull;ok
 k.determinar si un entrenador “X” tiene al Pokémon “Y”, tanto el nombre del entrenador
 como del Pokémon deben ser ingresados; además si el entrenador tiene al Pokémon se
 deberán mostrar los datos de ambos; """
@@ -36,25 +36,26 @@ pokemons = [{"nombre":"Tyrantrum", "nivel": 12 ,"tipo":"fuego", "subtipo":"plant
             {"nombre":"Rayo" , "nivel":3  ,"tipo":"fuego"  ,"subtipo":"terreno", "entrenador": "Pedro" }
 ]
 
+
 for entrenador in entrenadores:
     lista_entrenadores.insertar(entrenador, 'nombre')
 
+
 for pokemon in pokemons:
-    pos = lista_entrenadores.busqueda(pokemon['entrenador'],'nombre')
-    if (pos > -1):
-        del pokemon['entrenador']
-        lista_entrenadores.obtener_elemento(pos)['pokemons'].insertar(pokemon,'nombre')
+    pos = lista_entrenadores.busqueda(pokemon['entrenador'], 'nombre')
+    if pos > -1:
+        entrenador = lista_entrenadores.obtener_elemento(pos)
+        entrenador['pokemons'].insertar(pokemon, 'nombre')  # Inserta sin borrar 'entrenador'
 
-#A
-buscado = input('Ingrese nombre del entrenador a buscar')
+#Buscar entrenador por nombre 
+buscado = input('Ingrese el nombre del entrenador a buscar: ').strip().capitalize()
 pos = lista_entrenadores.busqueda(buscado, 'nombre')
-if ( pos > -1):
-    print('la cantidad de pokemons del entrenador es',lista_entrenadores.obtener_elemento(pos)['pokemons'].tamanio())
+
+if pos > -1:
+    entrenador = lista_entrenadores.obtener_elemento(pos)
+    print(f'El entrenador {buscado} tiene {entrenador["pokemons"].tamanio()} Pokémon.')
 else:
-    print('No se encontro el entrenador')
-print()
-
-
+    print('No se encontró el entrenador.')
     
 
 #B LISTAR LOS ENTRENADORES QUE HAYAN GANADO MAS DE TRES TORNEOS
@@ -131,6 +132,8 @@ for i in range (lista_entrenadores.tamanio()):
     entrenador = lista_entrenadores.obtener_elemento(i)
     total_batallas = entrenador['batallas_ganadas'] + entrenador['batallas_perdidas']
     if total_batallas > 0 and (entrenador['batallas_ganadas'] / total_batallas) * 100 > 79:
+        print ("Entrenadores cuyo porcentaje de batallas ganados sea mayor al 79%:  ", mayor_batallas)
+
         print(f"{entrenador['nombre']} ({(entrenador['batallas_ganadas'] / total_batallas) * 100:.2f}% victorias)")
 
 

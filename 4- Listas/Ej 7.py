@@ -24,7 +24,8 @@ print()
 
 cont_repetidos = 0
 
-for i in range(lista_dos.tamanio()): #puntoA concatenar dos listas, una atrás de la otra;
+#A
+for i in range(lista_dos.tamanio()): 
      numero = (lista_dos.obtener_elemento(i)) 
      lista_concatenada.insertar(numero)
 
@@ -32,14 +33,13 @@ for i in range(lista_uno.tamanio()):
      numero = (lista_uno.obtener_elemento(i)) 
      lista_concatenada.insertar(numero)
 
-
-for i in range(lista_dos.tamanio()): #puntoB concatenar dos listas en una sola omitiendo los datos repetidos y manteniendo su orden;
+#B
+for i in range(lista_dos.tamanio()): 
     num = lista_dos.obtener_elemento(i)
     if(lista_uno.busqueda(num) == -1):
         lista_uno.insertar(num) 
     else:
-        cont_repetidos+=1 #puntoC contar cuántos elementos repetidos hay entre dos listas, es decir la intersección de ambas
-
+        cont_repetidos+=1 #C
    
 print('la cantidad de elementos repetidos son: ', cont_repetidos)
 print('lista concatenada sin repetir')
@@ -50,6 +50,6 @@ while(lista_uno.tamanio()>0):#puntoD
     print('numero eliminado: ',numero)
     aux=lista_uno.eliminar(numero)
 
-# print('lista concatenada')
-# lista_concatenada.barrido()    
+print('Lista concatenada con todos los elementos :')
+lista_concatenada.barrido()    
 
