@@ -54,37 +54,36 @@ arbol.busqueda_proximidad('C')
 print()
 #d. determinar cuántos superhéroes hay el árbol;
 print("La cantidad de superheroes que hay son:")
-print(arbol.contar_nodos())
+print(arbol.contar_superheroes())
 
 
 #e. Doctor Strange en realidad está mal cargado. Utilice una búsqueda por proximidad para
 #encontrarlo en el árbol y modificar su nombre;
-buscado = input("Ingrese el nombre que desee modificar: ")
-arbol.busqueda_proximidad(buscado)
-buscado = input("Ingrese nuevamente el nombre a modificar: ")
-pos = arbol.busqueda(buscado)
+print('Buscando posibles coincidencias')
+arbol.busqueda_proximidad("Doctor")
+
+nombre_incorrecto = 'Doctor Strnge'
+pos = arbol.busqueda(nombre_incorrecto)
 
 if pos:
-        nuevo_nombre = input('Ingrese nuevo nombre')
-        nombre, superheroe = arbol.eliminar_nodo(buscado)
-        superheroe["nombre"] = nuevo_nombre
-        arbol = arbol.insertar_nodo(nuevo_nombre,superheroe)
+    print('Dato a corregir: ', nombre_incorrecto)
+    nombre, datos = arbol.eliminar_nodo(nombre_incorrecto)
+    datos["nombre"] = input("Ingrese nombre bien escrito").capitalize()
+    arbol = arbol.insertar_nodo(datos["nombre"],datos)
 else:
-    print("El nombre a modificar no se encuentra")
+    print('No se encontro el nombre incorrecto')
 
-print()
-
-print("Barrido con el nombre modificado: ")
+print("Listado en orden alfabetico corregido")
 arbol.inorden()
 print()
+
 
 #f. listar los superhéroes ordenados de manera descendente;
 print("Barrido de manera descendente de los heroes: ")
 arbol.postorden_heroes()
 print()
 
-#g. generar un bosque a partir de este árbol, un árbol debe contener a los superhéroes y otro a
-#los villanos, luego resolver las siguiente tareas:
+
 #g. generar un bosque a partir de este árbol, un árbol debe contener a los superhéroes y otro a
 #los villanos, luego resolver las siguiente tareas:
 arbol.dos_arboles(arbol_superheroes,arbol_villanos)
@@ -93,9 +92,10 @@ arbol.dos_arboles(arbol_superheroes,arbol_villanos)
 print("Cantidad de nodos del arbol de villanos: ", arbol_villanos.contar_nodos())
 print("Cantidad de nodos del arbol de heroes: ",arbol_superheroes.contar_nodos())
 print()
+
 #II. realizar un barrido ordenado alfabéticamente de cada árbol.
 print("Barrido del arbol de villanos:")
 arbol_villanos.inorden()
 print()
 print("Barrido del arbol de heroes")
-arbol_superheroes.inorden()
+arbol_superheroes.inorden() 

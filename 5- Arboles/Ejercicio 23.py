@@ -84,8 +84,6 @@ criaturas = {"nombre": "Harpias", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
 criaturas = {"nombre": "Argos Panoptes", "capturado_por": "Hermes","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
-criaturas = {"nombre": "Aves del Estinfalo", "capturado_por": "","descripcion":""}
-arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
 criaturas = {"nombre": "Talos", "capturado_por": "Medea","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
 criaturas = {"nombre": "Sirenas", "capturado_por": "","descripcion":""}
@@ -98,16 +96,28 @@ criaturas = {"nombre": "Basilisco", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
 criaturas = {"nombre": "Jabali de Erimanto", "capturado_por": "","descripcion":""}
 arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
+criaturas = {"nombre": "Aves del Estinfalo", "capturado_por": "","descripcion":""}
+arbol = arbol.insertar_nodo(criaturas["nombre"],criaturas)
+
 
 #EJERCICIO A
 print("Listado inorden de las criaturas y quienes la derrotaron")
-arbol.inorden()
+arbol.inorden_criaturas()
 print
 
 #EJERCICIO B
 #arbol.añadir_descripcion()
 #arbol.inorden()
 
+ #EJERCICIO C
+buscado = "Talos"
+pos = arbol.busqueda(buscado)
+if pos:
+    print ("\nInformacion de la criatura Talos:'",buscado," ",pos.datos)
+print()
+
+
+#EJERCICIO D
 dic = {}
 arbol.contador_criaturas_derrotadas(dic)
 #print(dic)
@@ -145,53 +155,61 @@ arbol.modificar_capturador('Toro de Creta', 'Heracles')
 arbol.modificar_capturador('Cierva de Cerinea', 'Heracles')
 arbol.modificar_capturador('Jabalí de Erimanto', 'Heracles')
 print()
-arbol.inorden()
+arbol.inorden_criaturas()
 
 #EJERCICIO I.se debe permitir búsquedas por coincidencia;
 clave = input('Comience a escribir parte del nombre de una criatura para buscarla: ')
-#print('Criaturas que contienen "', clave, '" en su nombre:' )
-arbol.busqueda_por_coincidencia(clave)
+print('Criaturas que contienen "', clave, '" en su nombre:' )
+arbol.busqueda_proximidad2(clave)
 print()
 
 #EJERCICIO J .eliminar al Basilisco y a las Sirenas;
 
-arbol.eliminar_nodo('Basilisco')
-#arbol.eliminar_nodo('Sirenas')
+info, datos = arbol.eliminar_nodo('Basilisco')
+print (info, 'ha sido eliminado')
+info, datos = arbol.eliminar_nodo('Sirenas')
+print (info, 'ha sido eliminado')
+print()
+
 
 print()
 print("Barrido sin los nodos de Basilisco y Sirenas")
 arbol.inorden()
-print()
+print() 
 
 #EJERCICIO K modificar el nodo que contiene a las Aves del Estínfalo, agregando que Heracles
-#derroto a varias;
-
-buscado = "Aves del Estinfalo"
+#derroto a varias; NO FUNCIONA
+buscado = "Toro de Creta"
 pos = arbol.busqueda(buscado)
 
-if pos:
-    derrota = input("Ingrese el nombre de quien derroto a las Aves del Estinfalo: ")
-    nombre, criaturas = arbol.eliminar_nodo(buscado)
-    criaturas["capturado_por"] = derrota
-    arbol = arbol.insertar_nodo(buscado,criaturas)
-print()
-
-print("Barrido modificando quien derroto a las Aves del Estinfalo")
-arbol.inorden()
-print()
+print("Resultado de búsqueda Estinfalo:", pos)
+if pos is not None:
+    print("Antes de la modificación:", pos)  
+    pos.datos['capturado_por'] = 'Heracles'
+    pos.datos['descripcion'] = 'Heracles derrotó a varias.'
+    print("Después de la modificación:", pos) 
+else:
+    print("No se encontró 'Aves del Estinfalo' en el árbol.")
 
 #EJERCICIO L.modifique el nombre de la criatura Ladón por Dragón Ladón;
 
-buscado = 'Ladon'
-pos = arbol.busqueda(buscado)
+pos = arbol.busqueda('Ladon')  # Buscar el nodo
+print("Resultado de búsqueda Ladon:", pos)
 
 if pos:
-     nuevo_nombre = input('Ingreses el nuevo nombre de ka criatura:')
-     nombre, criaturas = arbol.eliminar_nodo(buscado)
-     criaturas['nombre'] = nuevo_nombre
-     arbol = arbol.insertar_nodo(nuevo_nombre, criaturas)
-arbol.inorden_criaturas()
-print()
+    nombre, datos = arbol.eliminar_nodo('Ladon')  
+    print("Eliminado:", nombre, datos)
+    
+    if datos is not None:  
+        datos['nombre'] = 'Dragón Ladón'  
+        arbol = arbol.insertar_nodo('Dragón Ladón', datos)  
+    else:
+        print("No se pudo eliminar 'Ladón' o el nodo no existe.")  
+
+
+print("Árbol actualizado Ladon:")
+arbol.inorden()
+
 
 #EJERCICIO M , realizar un listado por nivel del arbol
 
@@ -203,3 +221,6 @@ print()
 print ('Capturadas por Heraccles')
 arbol.inorden_capturados_heracles()
 print()
+
+print('lista completa')
+arbol.inorden()

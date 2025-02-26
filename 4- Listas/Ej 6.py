@@ -97,6 +97,8 @@ for i in range(lista_personajes.tamanio()):
 
 print('La cantidad de super heroes que hay en el comic  Marvel son : ', cont_casa)
 print('La cantidad de super heroes que hay en el comic dc son : ', cont_casa2)
+
+#H
 cont_s = ""
 cont_b = ""
 cont_m = ""

@@ -50,16 +50,12 @@ print("Jedi ordenados por nombre:")
 lista_jedi.barrido()
 
 # B Mostrar información de Ahsoka Tano y Kit Fisto
+for nombre in ['Ahsoka Tano', 'Kit Fisto']:
+    pos = lista_jedi.busqueda(nombre, 'nombre_aprendiz')
+    if pos is not None:
+        print(f"\n Información de {nombre}:")
+        print(lista_jedi.obtener_elemento(pos))
 
-pos_ahsoka = lista_jedi.busqueda('Ahsoka Tano', 'nombre_aprendiz') 
-info_ahsoka= lista_jedi.obtener_elemento(pos_ahsoka)
-print('La informacion de Ahsoka Tano es:', 'Maestro:',info_ahsoka['maestro'],'Color de sable de luz:', info_ahsoka['color_sable'], 'Especie:', info_ahsoka['especie'])
-
-pos_kit = lista_jedi.busqueda('Kit Fisto', 'nombre_aprendiz') 
-info_kit= lista_jedi.obtener_elemento(pos_kit)
-print('La informacion de Kit Fisto tano es:', 'Maestro:',info_kit['maestro'],'Color de sable de luz:', info_kit['color_sable'], 'Especie:', info_kit['especie'])
-
-lista_jedi.barrido()
 
 # c. mostrar todos los padawan de Yoda y Luke Skywalker, es decir sus aprendices;
 lista_yoda = Lista()
@@ -77,19 +73,11 @@ print("Padawans de Luke Skywalker:")
 lista_luke.barrido()
 
 # d. mostrar los Jedi de especie humana y twilek;
+print("Jedi de especie humana y twilek:")
+for jedi in jedis:
+    if jedi['especie'] in ['humana', 'twilek']:
+        print(jedi['nombre_aprendiz'])
 
-aprendiz_yoda = ""
-aprendiz_luke = ""
-for i in range (lista_jedi.tamanio()):
-    pos = lista_jedi.obtener_elemento(i)
-    if (pos["maestro"] == "Yoda"):
-        aprendiz_yoda += (pos["nombre_aprendiz"]+ "  ")
-    if (pos["maestro"] == "Luke Skywalker"):
-        aprendiz_luke += (pos["nombre_aprendiz"]+ "  ")    
-
-print("Los Padawan de Yoda son: ", aprendiz_yoda)
-print("Los Padawan de Luke Skywalker son: ", aprendiz_luke)
-print()
 
 # e. listar todos los Jedi que comienzan con A;
 

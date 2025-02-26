@@ -85,18 +85,19 @@ def decodificar(cadena_cod, arbol_huff):
             arbol_aux = arbol_aux.der
         pos += 1
         if(arbol_aux.izq is None):
-            cadena_deco += arbol_aux.info
+            cadena_deco += arbol_aux.info + ''
             arbol_aux = arbol_huff
-    return cadena_deco
+    return cadena_deco.strip()
 
 
 cadena = ["Nublado","Baja","1","5","7"]
 cadena_cod = codificar(cadena, dic)
 
-print("Cadena codificada: ")
+print("\n Cadena codificada: ")
 print(cadena_cod)
-print("Cadena decodificada:")
+print("\n Cadena decodificada:")
 print(decodificar(cadena_cod, arbol_huffman))
 
+print("\n Tamaño en memoria (bytes):")
 from sys import getsizeof
-print(getsizeof(cadena_cod), getsizeof(b'1010111001110101101111'))
+print('Original:',getsizeof(cadena_cod), 'Comprimido:',getsizeof(b'1010111001110101101111'))

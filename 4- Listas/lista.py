@@ -148,6 +148,11 @@ class Lista(object):
     def ordenar(self, criterio):
         quicksort(self.__elementos, 0, len(self.__elementos)-1, criterio)
 
+    def barrido_personaje(self):
+        for elemento in self.__elementos:
+            print('nombre: ',elemento['nombre'],'edad', elemento['edad'], 'altura ', elemento['altura'], 'genero ', elemento['genero'], 'especie ', elemento['especie']) 
+            print('planeta natal', elemento['planeta_natal'], 'episodios en los que aparecio ', elemento['episodios_queaparecio'])
+
 
 # from random import randint
 # lista_vocales = Lista()

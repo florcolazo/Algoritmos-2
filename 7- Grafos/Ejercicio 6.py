@@ -371,9 +371,9 @@ else:
 # Considere como camino más corto el que tenga menor número de aristas;
 
 print ('--Camino mas corto entre dioses--')
-vertice1_buscado = (input('Ingrese un vertice'))
+vertice1_buscado = (input('Ingrese un vertice').capitalize())
 origen = dioses.buscar_vertice(vertice1_buscado)
-vertice2_buscado = (input('Ingrese el segundo vertice'))
+vertice2_buscado = (input('Ingrese el segundo vertice').capitalize())
 destino = dioses.buscar_vertice(vertice2_buscado)
 camino = dioses.dijkstra(origen,destino)
 
@@ -391,14 +391,14 @@ print('costo del camino:', costo)
 
 #g. realizar un barrido en profundidad y amplitud de dicho grafo;
 print('Barrido en profundidad y amplitud de un grafo')
-nombre_dios = (input('Ingrese el nombre de un dios: '))
+nombre_dios = (input('Ingrese el nombre de un dios: ').capitalize())
 origen = dioses.buscar_vertice(nombre_dios)
 
-print('barrido en profundidad ')
+print('Barrido en profundidad ')
 dioses.barrido_profundidad(origen)
 print()
 
-print('barrido en amplitud')
+print('Barrido en amplitud')
 dioses.barrido_amplitud(origen)
 print()
 
@@ -413,11 +413,11 @@ dioses.relaciones_nietos("Kronos","hijo",lista)
 
 
 #i. mostrar todos los ancestros de un determinado dios;
-buscado = (input("Ingrese el nombre de un dios para ver sus ancestros: "))
+buscado = (input("Ingrese el nombre de un dios para ver sus ancestros: ").capitalize())
 print("Ancestros de: ",buscado, ": ")
 dioses.ancestro(buscado)
 
 #k. mostrar todos los hijos de Tea;
 print()
 print("Hijos de Theia")
-dioses.relaciones("Theia","hijo")
+dioses.relaciones("Theia","hijo") 

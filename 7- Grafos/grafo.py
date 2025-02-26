@@ -108,6 +108,10 @@ class Grafo(object):
                     
     def barrido_amplitud(self, ver_origen):
         """Barrido en amplitud del grafo."""
+
+        for i in range(self.tamanio()):
+            vertice = self.inicio.obtener_elemento(i)
+            vertice['visitado'] = False
         cola = Cola()
         while(ver_origen < self.tamanio()):
             vertice = self.inicio.obtener_elemento(ver_origen)

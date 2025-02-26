@@ -2,7 +2,7 @@
 tidad de torneos ganados, cantidad de batallas perdidas y cantidad de batallas ganadas. Y ade-
 más la lista de sus Pokémons, de los cuales se sabe: nombre, nivel, tipo y subtipo. Se pide resolver
 las siguientes actividades utilizando lista de lista implementando las funciones necesarias:
-
+a.obtener la cantidad de pokemons de un determinado entrenador
 b.listar los entrenadores que hayan ganado más de tres torneos;ok
 [114]c.el Pokémon de mayor nivel del entrenador con mayor cantidad de torneos ganados;ok
 d.mostrar todos los datos de un entrenador y sus Pokémos;ok
@@ -47,7 +47,7 @@ for pokemon in pokemons:
         entrenador = lista_entrenadores.obtener_elemento(pos)
         entrenador['pokemons'].insertar(pokemon, 'nombre')  # Inserta sin borrar 'entrenador'
 
-#Buscar entrenador por nombre 
+#A
 buscado = input('Ingrese el nombre del entrenador a buscar: ').strip().capitalize()
 pos = lista_entrenadores.busqueda(buscado, 'nombre')
 
@@ -63,7 +63,7 @@ else:
 for i in range(lista_entrenadores.tamanio()):
     pos = lista_entrenadores.obtener_elemento(i)
     if (pos['torneos_ganados'] > 3):
-        print('El entrenador', pos['nombre'], 'ha ganados mas de tres torneos')
+        print(f" El entrenador {pos['nombre']} ha ganado más de tres torneos ({pos['torneos_ganados']} en total).")
 
 #C el Pokémon de mayor nivel del entrenador con mayor cantidad de torneos ganados
 
@@ -79,11 +79,10 @@ for i in range(lista_entrenadores.tamanio()):
 
 #obtenemos los datos del entrenador que tiene más torneos ganados
 entrenador_max = lista_entrenadores.obtener_elemento(pos_maximo)
-print('El entrenador con mayor torneos ganados es:')
-print(entrenador_max['nombre'])
+print(f" El entrenador con más torneos ganados es {entrenador_max['nombre']} con {maximo} torneos.")
 
 # Buscamos el Pokémon de mayor nivel de este entrenador
-max_nivel = 0
+max_nivel = -1
 pokemon_max = None
 
 # Recorremos la lista de Pokémon del entrenador
@@ -91,7 +90,7 @@ pokemon_max = None
 for j in range(entrenador_max['pokemons'].tamanio()):
     pokemon = entrenador_max['pokemons'].obtener_elemento(j)
     if pokemon['nivel'] > max_nivel:
-        pokemon_max = pokemon['nivel']
+        max_nivel = pokemon['nivel']
         pokemon_max = pokemon #guardamos el pokemon con mayor nivel
 
 #si se encontro un pokemon de mayor nivel, lo mostramos
@@ -101,13 +100,13 @@ if pokemon_max:
 else:
     print ('Este esntrenador no tiene Pokemon')
 
-#D - .mostrar todos los datos de un entrenador y sus Pokémos;
+#D - .mostrar todos los datos de un entrenador y sus Pokémons;
 
 def mostrar_pokemones(lista_entrenadores, nombre_entrenador):
-    nombre_entrenador = input('Ingrese nombre del entrenador para ver sus pokemones')
+    nombre_entrenador = input('Ingrese nombre del entrenador para ver sus pokemones: ').strip().capitalize()
     pos = lista_entrenadores.busqueda(nombre_entrenador, 'nombre')
 
-    if pos != -1: # Si el entrenador existe
+    if pos != -1: 
         entrenador = lista_entrenadores.obtener_elemento(pos)
         print(f"Entrenador: {entrenador['nombre']}")
         print(f"Torneos ganados: {entrenador['torneos_ganados']}")
@@ -132,7 +131,7 @@ for i in range (lista_entrenadores.tamanio()):
     entrenador = lista_entrenadores.obtener_elemento(i)
     total_batallas = entrenador['batallas_ganadas'] + entrenador['batallas_perdidas']
     if total_batallas > 0 and (entrenador['batallas_ganadas'] / total_batallas) * 100 > 79:
-        print ("Entrenadores cuyo porcentaje de batallas ganados sea mayor al 79%:  ", mayor_batallas)
+        print ("Entrenadores cuyo porcentaje de batallas ganados sea mayor al 79%:  ", total_batallas)
 
         print(f"{entrenador['nombre']} ({(entrenador['batallas_ganadas'] / total_batallas) * 100:.2f}% victorias)")
 
@@ -161,7 +160,7 @@ entrenadores_con_pokemon_especifico(lista_entrenadores)
 #G el promedio de nivel de los Pokémons de un determinado entrenador;
 cont_nivel = 0
 cant_pokemons = 0
-buscado = input('Ingrese nombre del entrenador para ver el promedio de nivel sus pokemons: ')
+buscado = input('Ingrese nombre del entrenador para ver el promedio de nivel sus pokemons: ').capitalize()
 pos = lista_entrenadores.busqueda(buscado,'nombre')
 if (pos > -1 ):
     for i in range(lista_entrenadores.obtener_elemento(pos)['pokemons'].tamanio()):
@@ -258,4 +257,4 @@ if pos1 > -1 :
     else:
         print(f'El entrenador{buscado1} no tiene al pokemon {buscado2}')
 else:
-    print(f'El entrenador {buscado1} no fue encontrado')
+    print(f'El entrenador {buscado1} no fue encontrado') 

@@ -160,7 +160,7 @@ class Arbol(object):
         if(self.info is not None):
             if(self.izq is not None):
                 self.izq.busqueda_proximidad2(clave)
-            if(self.datos['derrotada_por'][0:len(clave)] == clave):
+            if(self.datos['nombre'][0:len(clave)] == clave):
                 print(self.info, self.datos)
             if(self.der is not None):
                 self.der.busqueda_proximidad2(clave)    
@@ -170,7 +170,7 @@ class Arbol(object):
         if(self.info is not None):
             if(self.izq is not None):
                 self.izq.busqueda_proximidad3(clave)
-            if(self.datos['capturada_por'][0:len(clave)] == clave):
+            if(self.datos['capturado_por'][0:len(clave)] == clave):
                 print(self.info, self.datos)
             if(self.der is not None):
                 self.der.busqueda_proximidad3(clave) 
@@ -178,22 +178,19 @@ class Arbol(object):
 
 
     def remplazar(self):#el reemplazar es utilizado por el eliminar
-        """Determina el nodo que remplazará al que se elimina."""
-        info, datos = None, None    #aux 
-        if(self.der is None): #si la derecha del nodo esta vacia significa que ese es el mayor
-            info = self.info
-            datos = self.datos
-            if(self.izq is not None):
-                self.info = self.izq.info
-                self.der = self.izq.der
-                self.izq = self.izq.izq
-                self.datos = self.izq.datos
-            else:
-                self.info = None
-                self.datos = None
+        if self.izq is not None:  #  reemplazar si hay hijo izquierdo
+            self.datos = self.izq.datos
+            self.info = self.izq.info
+            self.der = self.izq.der
+            self.izq = self.izq.izq
+        elif self.der is not None:  # Si no hay hijo izquierdo, usamos el derecho
+            self.datos = self.der.datos
+            self.info = self.der.info
+            self.izq = self.der.izq
+            self.der = self.der.der
         else:
-            info, datos = self.der.remplazar()
-        return info, datos
+            return None, None  # Si no hay hijos none
+        return self.info, self.datos
 
     def eliminar_nodo(self, clave):
         """Elimina un elemento del árbol y lo devuelve si lo encuentra."""
@@ -297,7 +294,7 @@ class Arbol(object):
     def contar_superheroes(self):# EJERCICIO 5
         cantidad_superheroes = 0
         if(self.info is not None):
-            if(self.datos['villano']== False):   
+            if(self.datos['heroe']== True): 
                 cantidad_superheroes += 1   
             if(self.izq is not None):
                 cantidad_superheroes += self.izq.contar_superheroes()
@@ -330,15 +327,16 @@ class Arbol(object):
 
 
     def dos_arboles(self,arbol_superheroes, arbol_villanos): #EJERCICIO 5
-                if(self.info is not None):
-                        if(self.datos['heroe'] == True):
-                            arbol_superheroes = arbol_superheroes.insertar_nodo(self.info, self.datos)
-                        else:
-                            arbol_villanos = arbol_villanos.insertar_nodo(self.info, self.datos)
-                        if(self.izq is not None):
-                            self.izq.dos_arboles(arbol_superheroes, arbol_villanos)
-                        if(self.der is not None):
-                            self.der.dos_arboles(arbol_superheroes, arbol_villanos)
+        if(self.info is not None):
+            if(self.datos['heroe']== True):   
+                arbol_superheroes.insertar_nodo(self.info,self.datos)
+            else:
+                arbol_villanos.insertar_nodo(self.info,self.datos)  
+
+            if(self.izq is not None):
+               self.izq.dos_arboles(arbol_superheroes,arbol_villanos)
+            if(self.der is not None):
+                self.der.dos_arboles(arbol_superheroes,arbol_villanos) 
 
     def contar_nodos(self): #EJERCICIO 5
         cantidad_nodos = 0
@@ -362,11 +360,13 @@ class Arbol(object):
                 self.der.modificar(clave) 
 
 
-    def inorden_criaturas(self):  
+    def inorden_criaturas(self):  #EJERCICIO 23
         if(self.info is not None):  
             if(self.izq is not None): 
                 self.izq.inorden_criaturas()
-                print(self.datos)
+            if (self.datos['capturado_por'] != ''):
+                print (self.info, ' fue derrotada por ', self.datos['capturado_por'])
+                    
             if(self.der is not None):
                 self.der.inorden_criaturas() 
 
